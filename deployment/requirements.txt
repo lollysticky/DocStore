@@ -1,0 +1,2 @@
+# RGBColorField
+django-colorful==1.2
