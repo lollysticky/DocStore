@@ -1,0 +1,45 @@
+@import url('footer.css');
+@import url('table.css');
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+/* Keep footer at bottom */
+#container {
+   min-height:100%;
+   position:relative;
+}
+
+.upload button.file-upload {
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 50;
+    filter: alpha(opacity=0);
+}
+
+.ProjectTileRow {
+    padding: 5px;
+    font-size: 80%;
+    color: #808080;
+}
+.ProjectTile {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    border: 2px solid #808080;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.ProjectTile img {
+    height: 35px;
+    opacity: 0.5;
+}
+
+
+.ProjectTile:hover img {
+    opacity: 0.8;
+}

@@ -1,0 +1,44 @@
+<!-- Code Snippet: Document Overview Table -->
+{% load static %}
+{% if documents.exists %}
+    <div class="Table">
+        <div class="TableRow">
+            <div class="TableHead">Project</div>
+            <div class="TableHead">Name</div>
+            <div class="TableHead">Type</div>
+            <div class="TableHead">Date</div>
+            <div class="TableHead">Size</div>
+            <div class="TableHead"></div>
+        </div>
+        {% for document in documents %}
+            {% cycle 'uneven-row' 'even-row' as rowcolors silent %}
+            <div class="TableRow">
+                {% if document.project %}
+                    <div class="TableCell {{ rowcolors }}">{{ document.project.ref_id }}</div>
+                {% else %}
+                    <div class="TableCell {{ rowcolors }}">{{ document.project }}</div>
+                {% endif %}
+
+                <div class="TableCell {{ rowcolors }}">
+                    <a href="{% url 'single_document_details' document.id %}">
+                        {{ document.filename_tr }}
+                    </a>
+                </div>
+                <div class="TableCell {{ rowcolors }}">{{ document.type }}</div>
+                <div class="TableCell {{ rowcolors }}">{{ document.datetime }}</div>
+                <div class="TableCell {{ rowcolors }}">{{ document.file.file.size|filesizeformat }}</div>
+                <div class="TableCell {{ rowcolors }}">
+                    <!--<form action="" method="post">
+                        {% csrf_token %}
+                        <input type="image"  src="{% static 'img/trashcan.png' %}" name="DeleteDocument" value="{{ document.id }}"></input>
+                    </form>
+                    <img src="{% static 'img/trashcan.png' %}" alt="trashcan">-->
+                    <a href="{% url 'single_document_delete' document.id %}"><img src="{% static 'img/trashcan.png' %}" alt="trashcan" title="Delete"></a>
+                    <a href="{% url 'single_document_details' document.id %}"><img src="{% static 'img/info.png' %}" alt="info" title="Info"></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No Document found!</p>
+{% endif %}

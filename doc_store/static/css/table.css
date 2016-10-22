@@ -1,0 +1,53 @@
+.Table {
+    display: table;
+    color: #d9d9d9;
+    font-size: 80%;
+}
+
+.TableRow {
+    display: table-row;
+}
+
+.TableRow:hover {
+    color: #808080;
+}
+
+.TableRow .uneven-row {
+    background-color: #f2f2f2;
+}
+
+.TableRow .even-row {
+    background-color: #FFFFFF;
+}
+
+.TableCell {
+    padding: 5px;
+    display: table-cell;
+    border-top: 1px solid #d9d9d9;
+}
+
+.TableCell img {
+    height: 15px;
+    opacity: 0.5;
+    display: inline-block;
+}
+
+.TableCell input {
+    height: 15px;
+    opacity: 0.5;
+}
+
+.TableRow:hover img {
+    opacity: 1.0;
+}
+.TableRow:hover input {
+    opacity: 1.0;
+}
+
+.TableHead {
+    color: #808080;
+    padding: 5px;
+    display: table-cell;
+    background-color: #d9d9d9;
+    border-bottom: 2px solid #d9d9d9;
+}

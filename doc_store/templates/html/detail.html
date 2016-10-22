@@ -1,0 +1,11 @@
+{% extends "html/basic/base.html" %}
+
+{% block content %}
+
+{% if document %}
+<ul>
+    <li>{{ document.original_filename }}</li>
+</ul>
+{% endif %}
+
+{% endblock %}

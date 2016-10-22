@@ -1,0 +1,18 @@
+{% extends "html/basic/base.html" %}
+
+{% block content %}
+
+    {% if message %}
+        {{ message }}
+    {% endif %}
+
+    <div class="upload">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="file-upload">Upload</button>
+        </form>
+    </div>
+
+
+{% endblock %}

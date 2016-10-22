@@ -1,0 +1,14 @@
+<!-- Code Snippet: Project Overview Table -->
+{% load static %}
+{% if projects.exists %}
+
+    <div class="ProjectTileRow">
+        {% for project in projects %}
+            <div class="ProjectTile">
+                <a href="{% url 'single_document_details' 0 %}"><img src="{% static 'img/project_map.png' %}" alt="project"></a>
+                {{ project.ref_id }}
+            </div>
+        {% endfor %}
+    </div>
+
+{% endif %}

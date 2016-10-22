@@ -1,0 +1,21 @@
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+        {% block extra_head_content %}{% endblock %}
+    </head>
+    <body>
+        <div id='container'>
+            {% block header %}
+            {% include 'html/basic/header.html' %}
+            {% endblock %}
+
+            {% block content %}{% endblock %}
+
+            {% block footer %}
+            {% include 'html/basic/footer.html' %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

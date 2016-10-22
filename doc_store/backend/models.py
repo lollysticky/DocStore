@@ -4,7 +4,7 @@ import uuid
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
-from django.contrib.postgres.fields import JSONField
+#from django.contrib.postgres.fields import JSONField
 
 from .enums import DOCUMENT_TYPES
 
@@ -15,16 +15,32 @@ class Document(models.Model):
     """
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    type = models.CharField(max_length=12, choices=DOCUMENT_TYPES.CHOICES, default=DOCUMENT_TYPES.UNKNOWN)
+    type = models.IntegerField(choices=DOCUMENT_TYPES.CHOICES, default=DOCUMENT_TYPES.UNKNOWN)
     md5 = models.CharField(blank=True, max_length=32)
     original_filename = models.CharField(blank=True, max_length=128)
-    project = models.ForeignKey('Project', default=None)
+    project = models.ForeignKey('Project', null=True, blank=True, default=None)
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     notes = GenericRelation('Note')
-    labels = GenericRelation('Label')
+    labels = models.ManyToManyField('Label')
+    file = models.FileField(upload_to='raw')    #save files to settings.MEDIA_ROOT/raw
 
     def __str__(self):
         return "Document: {0}".format(self.original_filename)
+
+    @property
+    def datetime(self):
+        return self.created_at.strftime("%Y-%m-%d %H:%M:%S")
+
+    @property
+    def filename_tr(self):
+        """
+        Trim the filename for representation purposes
+        """
+        length = 100
+        if len(self.original_filename) <= length:
+            return self.original_filename
+        else:
+            return '...' + self.original_filename[length:]
 
 
 class Project(models.Model):
@@ -36,7 +52,7 @@ class Project(models.Model):
     ref_id = models.CharField(blank=True, max_length=128)
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     notes = GenericRelation('Note')
-    labels = GenericRelation('Label')
+    labels = models.ManyToManyField('Label')
 
     def __str__(self):
         return "Project: {0}".format(self.ref_id)
